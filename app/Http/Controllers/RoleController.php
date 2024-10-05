@@ -87,4 +87,11 @@ class RoleController extends Controller
         ], 200);
     
     }
+
+
+    // Add permission to role
+    // public function addPermissionToRole($roleId){
+    //     $role = Role::findOrFail($roleId);
+        
+    // }
 }
