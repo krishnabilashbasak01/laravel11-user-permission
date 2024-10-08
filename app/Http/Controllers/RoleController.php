@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
@@ -21,7 +22,7 @@ class RoleController extends Controller
     // Create Roles
     public function create(Request $request) {
         $validator = Validator::make($request->all(), [
-            "name" => "required|string|max:255|unique:permissions",
+            "name" => "required|string|max:255|unique:roles",
         ]);
 
         if ($validator->fails()) {
@@ -89,9 +90,59 @@ class RoleController extends Controller
     }
 
 
-    // Add permission to role
-    // public function addPermissionToRole($roleId){
-    //     $role = Role::findOrFail($roleId);
-        
-    // }
+    // Get permission
+    public function permissions($id) {
+        $role = Role::find($id);
+        $permissions = $role->permissions;
+
+        return response([
+            'status' => 'success',
+            'permissions' => $permissions
+        ], 200);
+    }
+
+    // Add Permissions
+    public function addPermissions(Request $request ,$roleId){
+        $role = Role::find($roleId);
+        $role->givePermissionTo($request->permission);
+
+        return response([
+            'status' => 'success',
+            'message' => "Permission added successfully"
+        ], 200);
+    }
+
+    // delete role permission
+    public function deletePermission(Request $request, $roleId){
+        $role = Role::find($roleId);
+        $role->revokePermissionTo($request->permission);
+
+        return response([
+            'status' => 'success',
+            'message' => "Permission removed successfully"
+        ], 200);
+    }
+
+    // add role to user
+    public function addUserRole(Request $request, $id){
+        $user = User::find($id);
+
+        $user->assignRole($request->role);
+
+        return response([
+            'status' => 'success',
+            'message' => "Role Added successfully"
+        ], 200);
+    }
+
+    // Remove role from user
+    public function removeRole(Request $request, $userId){
+        $user = User::find($userId);
+        $user->removeRole($request->role);
+
+        return response([
+            'status' => 'success',
+            'message' => "Role Removed successfully"
+        ], 200);
+    }
 }

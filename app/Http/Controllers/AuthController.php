@@ -36,6 +36,11 @@ class AuthController extends Controller
         return view('admin.dashboard');
     }
 
+    // Users
+    public function users() {
+        return view('admin.users');
+    }
+
 
     // Logout
     public function logout(){

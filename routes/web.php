@@ -19,6 +19,21 @@ Route::prefix("/admin")->group(function () {
             AuthController::class,
             "index",
         ])->name("dashboard");
+
+
+
+        Route::match(["get", "post"], "/users", [
+            AuthController::class,
+            "users"
+        ]);
+
+
+
+
+
+
+
+        // Logout
         Route::match(["get", "post"], "/logout", [
             AuthController::class,
             "logout",
