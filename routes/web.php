@@ -25,7 +25,7 @@ Route::prefix("/admin")->group(function () {
         Route::match(["get", "post"], "/users", [
             AuthController::class,
             "users"
-        ]);
+        ])->middleware('role:super-admin|admin|manager');
 
 
 

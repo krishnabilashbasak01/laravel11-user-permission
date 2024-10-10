@@ -28,86 +28,94 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12 col-lg-6 col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Roles</h3>
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                                        data-target="#crateUserTypeModal" title="Add New Role">
-                                        <i class="fa fa-plus-square"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"
-                                        title="Collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                                        <i class="fas fa-times"></i>
-                                    </button>
+                    @canany(['add role', 'all permission'])
+                        <div class="col-12 col-lg-6 col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Roles</h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                            data-target="#crateUserTypeModal" title="Add New Role">
+                                            <i class="fa fa-plus-square"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                            title="Collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Roles -->
+                                    <table id="roles" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Name</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <!-- Roles -->
-                                <table id="roles" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Name</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
-                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-lg-6 col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Permissions</h3>
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                                        data-target="#cratePermissionModal" title="Add New Permission">
-                                        <i class="fa fa-list"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"
-                                        title="Collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                                        <i class="fas fa-times"></i>
-                                    </button>
+                    @endcanany
+                    @canany(['add permission', 'all permission'])
+                        <div class="col-12 col-lg-6 col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Permissions</h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                            data-target="#cratePermissionModal" title="Add New Permission">
+                                            <i class="fa fa-list"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                            title="Collapse">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <!-- User Permission -->
+                                    <table id="permissions" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Name</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <!-- User Permission -->
-                                <table id="permissions" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Name</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                </table>
-                            </div>
                         </div>
-                    </div>
+                    @endcanany
+
                 </div>
 
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Users</h3>
                         <div class="card-tools">
-                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                                data-target="#crateUserModal" title="Add New User">
-                                <i class="fa fa-user-plus"></i>
-                            </button>
+                            @canany(['user create', 'all permission'])
+                                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                                    data-target="#crateUserModal" title="Add New User">
+                                    <i class="fa fa-user-plus"></i>
+                                </button>
+                            @endcanany
+
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                                 <i class="fas fa-minus"></i>
                             </button>
@@ -686,17 +694,23 @@
                         <td>${user.email}</td>
                         <td></td>
                         <td>
+                            @canany(['add role', 'all permission'])
                                     <button type="button" class="openUserRolesModal btn btn-sm btn-success" data-toggle="modal"
                                         data-target="#addUserRoleModal" data-user-id='${user.id}' title="Add New Role">
                                         <i class="fa fa-plus"></i>
                                     </button>
+                                    @endcan
+                                    @canany(['user edit', 'all permission'])
                                     <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
                                         data-target="#editRoleModal" title="Edit User">
                                         <i class="fa fa-pen"></i>
                                     </button>
+                                    @endcan
+                                    @canany(['user delete', 'all permission'])
                                     <button onclick="" type="button" data-user-id="${user.id}" class="btn btn-sm btn-danger deleteUser"  title="Delete User">
                                         <i class="fa fa-trash"></i>
                                     </button>
+                                    @endcan
                         </td>
                         </tr>`)
                 });
